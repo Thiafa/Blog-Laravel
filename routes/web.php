@@ -12,6 +12,7 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\ForgotPasswordController;
 use App\Http\Controllers\Auth\ResetPasswordController;
 
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -56,6 +57,10 @@ Route::prefix('admin')->group(function () {
     Route::get('home', function () {
         return 'Welcome Admin';
     });
+});
+
+Route::middleware('auth:web')->group(function () {
+    Route::resource('post', PostController::class);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
